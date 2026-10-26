@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ivory: #f6f3ec;
+  --color-paper: #fbf9f4;
+  --color-ink: #17191a;
+  --color-graphite: #3a3d3c;
+  --color-muted: #6c6d68;
+  --color-faint: #9a9a92;
+  --color-rule: #e2ddd1;
+  --color-rule-strong: #cfc8b8;
+  --color-sage: #7c937f;
+  --color-sage-soft: #e6ebe2;
+  --color-forest: #2e4a3b;
+  --color-forest-deep: #223a2e;
+
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-sage-soft);
+    color: var(--color-forest-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 3rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+}
+
+/* Hero fibre illustration: strokes draw in once, slowly. */
+@keyframes fibre-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fibre-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: fibre-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.fade-in-late {
+  animation: fade-in 0.9s ease-out 1.6s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fibre-path,
+  .fade-in-late {
+    animation: none;
+  }
+}
